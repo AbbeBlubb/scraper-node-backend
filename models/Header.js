@@ -5,6 +5,4 @@ const headerSchema = new mongoose.Schema({
   url: String,
 });
 
-const Header = mongoose.model("Header", headerSchema);
-
-module.exports = Header;
+module.exports = mongoose.model("Header", headerSchema);
