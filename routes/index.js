@@ -1,11 +1,11 @@
+const fs = require('fs');
+const request = require('request-promise');
+const cheerio = require('cheerio');
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const Header = mongoose.model('Header');
 const helpers = require('../helpers');
-const request = require('request-promise');
-const cheerio = require('cheerio');
-const fs = require('fs');
 
 
 // Initialize the model
@@ -16,10 +16,8 @@ headerModel.save()
 const today = helpers.getDate();
 const latestDate = fs.readFileSync('./data/latest-date.txt', 'utf-8')
 
-// Vars for scraping
+// URL:s for scraping
 const urlAftonbladet = 'https://www.aftonbladet.se';
-
-
 
 
 async function scrapeDomTree(urlToScrape) {
@@ -34,7 +32,8 @@ async function scrapeDomTree(urlToScrape) {
       const baseUrl = 'https://www.aftonbladet.se';
 
       // Get the DOM tree
-      const htmlResponse = await request.get(urlToScrape);
+      const htmlResponse = await request.get(urlToScrape); 
+      console.log('!! The scraper has scraped the site')
       const $ =  cheerio.load(htmlResponse);
 
       // Select data
@@ -48,7 +47,7 @@ async function scrapeDomTree(urlToScrape) {
       // Save the data + scraping date, in case you want to experiment and avoid repeated scrapes
       // fs.writeFileSync(file, data[, options])
       // JSON.stringify(value[, replacer[, space]])
-      fs.writeFileSync('./data/latest-scrape.js', JSON.stringify(scrapeResults, null, 2), 'utf-8');
+      fs.writeFileSync('./data/latest-scrape.json', JSON.stringify(scrapeResults), 'utf-8');
       fs.writeFileSync('./data/latest-date.txt', today, 'utf-8' );
 
       // Write to DB
@@ -62,20 +61,20 @@ async function scrapeDomTree(urlToScrape) {
     }
 
   } else {
-      // Returnera senaste sparade data
-      return fs.readFileSync('./data/latest-scrape.js', 'utf-8')
+      // Returnera senaste sparade data. Parsa till JS iom att response sker i json för att matcha scraperns return
+      console.log('!! Loaded local file');
+      return JSON.parse(fs.readFileSync('./data/latest-scrape.json', 'utf-8'));
     }
 }
 
 
-
-
 // Routes. Exported at the end of the file
-router.get('/test', async function(req, res){
+router.get('/aftonbladet', async function(req, res){
 
-  //data to user = kör scrapern och få tillbaka svar. scrapeDomTree(urlAftonbladet);
+  // Run the scraper and load the data
   const data = await scrapeDomTree(urlAftonbladet);
 
+  // Response to JSON
   res.json(data)
 });
 
