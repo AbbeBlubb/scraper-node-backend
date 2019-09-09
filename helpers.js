@@ -1,4 +1,6 @@
 const moment = require('moment');
+const mongoose = require('mongoose');
+//const Scrape = mongoose.model('Scrape');
 
 exports.getTime = function() {
   const currentdate = new Date();
@@ -6,5 +8,7 @@ exports.getTime = function() {
 };
 
 exports.getDate = function() {
-  return moment().format('YYMMDD');
+  return moment().format('YY-MM-DD');
 }
+
+

@@ -11,7 +11,7 @@ app.use(cors());
 // Set indentation to 2 spaces for response
 app.set('json spaces', 2);
 
-// Use rotes from separate file
+// Use routes from separate file
 app.use('/', routes);
 
 module.exports = app;

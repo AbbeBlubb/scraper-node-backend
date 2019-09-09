@@ -22,8 +22,8 @@ mongoose.connection.once("open", () => {
 })
 
 
-// Import the models for the app. Will be initialized in app.js
-require('./models/Header'); 
+// Import the models for the app. Will be constructed in routes/index.js
+require('./models/Scrape'); 
 
 
 // Start the app
