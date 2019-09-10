@@ -17,7 +17,6 @@ exports.getLatestDBdate = async function() {
   const latestDBDateAsObject = await Scrape.find({}, {date: 1}).sort({date: -1}).limit(1);
   // If latestDBDateASObject === [], then latestDBDateAsString will be null. Else, get the date
   const latestDBDateAsString = (latestDBDateAsObject.length == 0) ? null : (latestDBDateAsObject[0].date).toISOString().substring(2, 10);
-  console.log(latestDBDateAsString)
   return latestDBDateAsString;
 }
 
