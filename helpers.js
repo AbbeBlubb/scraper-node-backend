@@ -16,7 +16,7 @@ exports.getLatestDBdate = async function() {
   // .find returns an empty array if no matches are found. .findOne returns null if no matches are found. Here all documents are needed.
   const latestDBDateAsObject = await Scrape.find({}, {date: 1}).sort({date: -1}).limit(1);
   // If latestDBDateASObject === [], then latestDBDateAsString will be null. Else, get the date
-  const latestDBDateAsString = (latestDBDateAsObject.length == 0) ? null : (latestDBDateAsObject[0].date).toISOString().substring(2, 10);
+  const latestDBDateAsString = (latestDBDateAsObject.length === 0) ? null : (latestDBDateAsObject[0].date).toISOString().substring(2, 10);
   return latestDBDateAsString;
 }
 
