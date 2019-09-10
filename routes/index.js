@@ -45,8 +45,8 @@ const latestDate = await helpers.getLatestDBdate()
       // Write to DB
       scrapeModel.save();
 
-      // Return the newly scraped data
-      return scrapeModel
+      // Return the newly scraped data directly whitout getting it from the DB. Must be put in an array, as the frontend is adapted to the data structure from the DB, which is an array with objects
+      return [scrapeModel]
     } 
     
     catch (err) {
