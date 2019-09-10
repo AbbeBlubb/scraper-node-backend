@@ -11,7 +11,7 @@ async function scrapeDomTree(urlToScrape) {
 // Vars with dates. They are in the async function because of a needed await
 const todaysDate = helpers.getTodaysDate();
 const latestDate = await helpers.getLatestDBdate()
-console.log(todaysDate, latestDate)
+//console.log(todaysDate, latestDate)
 
   if (todaysDate !== latestDate) {
     try {
@@ -54,6 +54,7 @@ console.log(todaysDate, latestDate)
     }
 
   } else {
+      console.log('!! The scraper has returned a cached copy')
       // Return the latest written document from the DB
       return await Scrape.find({}).sort({date: -1}).limit(1);
     }
