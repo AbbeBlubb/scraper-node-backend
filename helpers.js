@@ -13,8 +13,10 @@ exports.getTodaysDate = function() {
 
 // Latest date for write to DB
 exports.getLatestDBdate = async function() {
+  // .find returns an empty array if no matches are found. .findOne returns null if no matches are found. Here all documents are needed.
   const latestDBDateAsObject = await Scrape.find({}, {date: 1}).sort({date: -1}).limit(1);
-  const latestDBDateAsString = await (latestDBDateAsObject[0].date).toISOString().substring(2, 10);
+  // If latestDBDateASObject === [], then latestDBDateAsString will be null
+  const latestDBDateAsString =  latestDBDateAsObject === !null ? (latestDBDateAsObject[0].date).toISOString().substring(2, 10) : null;
   return latestDBDateAsString;
 }
 

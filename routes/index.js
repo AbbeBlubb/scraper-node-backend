@@ -65,7 +65,7 @@ const latestDate = await helpers.getLatestDBdate()
 router.get('/aftonbladet', async function(req, res){
 
   // Run the scraper and load the data
-  const data = await scrapeDomTree(helpers.getUrlAftonbladet);
+  const data = await scrapeDomTree(helpers.getUrlAftonbladet());
   
   // Response to JSON
   res.json(data)
