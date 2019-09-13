@@ -1,3 +1,11 @@
+
+
+### skapa projektet
+
+> npm init -y // Genererar en package.json utan att ställa frågor
+> npm install nodemon // Skriv sen in nodemon och start i scripts
+
+
 ### package.json
 
 scripts: "dev": "nodemon", 
