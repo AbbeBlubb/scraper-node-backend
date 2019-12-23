@@ -13,24 +13,25 @@ const todaysDate = helpers.getTodaysDate();
 const latestDate = await helpers.getLatestDBdate();
 //console.log(todaysDate, latestDate)
 
+  // When testing, make this if to true, to avoid fetch from DB
   if (todaysDate !== latestDate) {
     try {
 
       // Vars for scraping Aftonbladet
       const scrapeResults = [];
       const anchorWithClassAndAttribute = "a.HLf1C";
-      const classForTitle = '._2mFB0';
+      const classForTitle = 'h3._2mFB0, h3.XucU-, h3._3-mRA';
       const baseUrl = 'https://www.aftonbladet.se';
 
       // Get the DOM tree
       const htmlResponse = await request.get(urlToScrape);
       console.log('!! The scraper has scraped the site');
-      const $ =  cheerio.load(htmlResponse);
+      const $ = cheerio.load(htmlResponse);
 
       // Select data
       $(anchorWithClassAndAttribute).each((index, element) => {
         const title = $(element).find(classForTitle).text();
-        const url = baseUrl + $(element).attr('href');
+        const url = $(element).attr('href').startsWith('https') ? $(element).attr('href') : baseUrl + $(element).attr('href');
         const scrapeResult = { title, url };
         scrapeResults.push(scrapeResult);
       });
