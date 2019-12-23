@@ -1,5 +1,3 @@
-
-
 ### skapa projektet
 
 > npm init -y // Genererar en package.json utan att ställa frågor
@@ -13,7 +11,3 @@ scripts: "dev": "nodemon",
 
 scripts: "start": "node index.js"
 // Heroku kör "npm start". Om du ändrar namnet på start-filen så behöver därför filnamnet uppdateras även här
-
-### Selectorer för Aftonbladet
-var allHeaders = document.querySelectorAll("a._3xv_Q[data-test-id='teaser']")
-// nodelist 88
