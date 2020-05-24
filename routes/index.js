@@ -8,12 +8,11 @@ const helpers = require('../helpers');
 
 async function scrapeDomTree(urlToScrape) {
 
-// Vars with dates. They are in the async function because of a needed await
+// Vars with dates
 const todaysDate = helpers.getTodaysDate();
-const latestDate = await helpers.getLatestDBdate();
-//console.log(todaysDate, latestDate)
+const latestDate = await helpers.getLatestDBdate(); // Await needed
 
-  // When testing, make this if to true, to avoid fetch from DB
+  // When testing, make this if-statement to true, to avoid fetch from DB
   if (todaysDate !== latestDate) {
     try {
 
@@ -62,7 +61,7 @@ const latestDate = await helpers.getLatestDBdate();
 }
 
 
-// Routes. Exported at the end of the file
+// Routes (exported at the end of the file)
 router.get('/aftonbladet', async function(req, res){
 
   // Run the scraper and load the data
