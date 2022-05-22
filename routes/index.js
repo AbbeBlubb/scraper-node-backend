@@ -18,8 +18,8 @@ const latestDate = await helpers.getLatestDBdate(); // Await needed
 
       // Vars for scraping Aftonbladet
       const scrapeResults = [];
-      const anchorWithClassAndAttribute = "a.HLf1C";
-      const classForTitle = 'h3._2mFB0, h3.XucU-, h3._3-mRA';
+      const anchorWithClassAndAttribute = "a[data-test-tag='internal-link:single-page-link']";
+      const classForTitle = 'h2';
       const baseUrl = 'https://www.aftonbladet.se';
 
       // Get the DOM tree
